@@ -15,10 +15,9 @@ namespace PluginSettingsWatcher
         {
             // find the current version of studio
             var robloxDirectory = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Roblox");
-            var currentStudioVersion = (string) Registry.GetValue(@"HKEY_CURRENT_USER\Software\ROBLOX Corporation\Roblox", "curQTStudioVer", null);
-            var studioDirectory = Path.Combine(robloxDirectory, "Versions", currentStudioVersion);
-            var studioExecutable = Path.Combine(studioDirectory, "RobloxStudioBeta.exe");
-
+            var studioVersionHash = (string) Registry.GetValue(@"HKEY_CURRENT_USER\Software\StudioQTRobloxReg", "version", null);
+            var studioExecutable = Path.Combine(robloxDirectory, "Versions", studioVersionHash, "RobloxStudioBeta.exe");
+            
             // search RobloxStudioBeta.exe for ASCII strings of two or more characters
             ProcessStartInfo info = new ProcessStartInfo();
             info.FileName = "strings.exe";
